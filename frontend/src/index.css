@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+.no-scroll {
+  overflow: hidden;
+  height: 100%; /* Prevent scrolling on the body */
+}
