@@ -39,8 +39,8 @@ export default function Hero() {
   };
   
   return (
-    <Element name="home" className="mt-16">
-      <div className="bg-green-800 relative overflow-hidden lg:min-h-screen">
+    <Element name="home" className="mt-20">
+      <div className="bg-green-800 relative overflow-hidden lg:min-h-[calc(90vh-4rem)]">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div
@@ -56,7 +56,7 @@ export default function Hero() {
         <div className="absolute bottom-20 right-20 w-40 h-40 bg-yellow-300 rounded-full opacity-20"></div>
 
         <div className="container mx-auto px-4 py-16 md:py-20">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center w-full">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-12 lg:gap-16 items-center w-full max-w-7xl mx-auto">
             {/* Left side content */}
             <div className="space-y-8 z-10">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-[#fffff8] leading-tight tracking-tight cursor-default">
