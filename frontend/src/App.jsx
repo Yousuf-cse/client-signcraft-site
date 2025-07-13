@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
-import Header from "./components/Header"; // Import Header
+import Header from "./components/Header/Header"; // Import Header
 import Footer from "./components/Footer"; // Import Footer
 import Home from "./pages/Home";
 import BookInstallationPage from "./section/BookInstallationPage";
