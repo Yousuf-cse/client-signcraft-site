@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Element } from "react-scroll";
 import { initialServices } from "../components/services/initialServices";
 import { additionalServices } from "../components/services/additionalServices";
+import { Link } from "react-router-dom";
+import { servicesData } from "../data/servicesData";
 
 export default function Services() {
   const [showMore, setShowMore] = useState(false);
@@ -28,8 +30,15 @@ export default function Services() {
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 ">
           {displayedServices.map((service, index) => {
             const Icon = service.icon;
+              const serviceEntry = Object.entries(servicesData).find(
+                ([slug, data]) => data.name === service.title
+              );
+          const [slug, fullServiceData] = serviceEntry || [];
+
             return (
-              <div
+              <Link
+                to={`/services/${slug}`}
+                state={{ slug, service: fullServiceData }}
                 key={index}
                 className="group bg-white rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
               >
@@ -53,7 +62,7 @@ export default function Services() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </Link>
             );
           })}
         </div>
