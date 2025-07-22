@@ -1,7 +1,7 @@
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouteLink } from "react-router-dom";
 
-export default function DesktopNav({ isHome, menuItems, calculateDuration }) {
+export default function DesktopNav({ isHome, menuItems }) {
   return (
     <nav className="hidden md:flex flex-none justify-center">
       <ul className="flex space-x-4">
@@ -14,8 +14,7 @@ export default function DesktopNav({ isHome, menuItems, calculateDuration }) {
                   to={sectionId}
                   spy={true}
                   smooth={true}
-                  offset={-20}
-                  duration={calculateDuration(sectionId)}
+                  offset={-80}
                   className="text-green-800 hover:text-yellow-500 cursor-pointer transition-colors duration-200 ease-in-out"
                 >
                   {item}

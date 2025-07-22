@@ -6,7 +6,6 @@ import DesktopNav from "./DeskTopNav";
 import MobileMenu from "./MobileMenu";
 import HamburgerMenu from "./HamburgerMenu";
 import { menuItems } from "./menuItems";
-import { calculateDuration } from "../../lib/scrollUtils";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -88,7 +87,6 @@ export default function Header() {
           <DesktopNav
             isHome={isHome}
             menuItems={menuItems}
-            calculateDuration={calculateDuration}
           />
           {/* Right: Mobile Menu Button (invisible on desktop, but keeps space) */}
           <div className="flex-1 flex justify-end md:justify-end md:flex">
@@ -107,7 +105,6 @@ export default function Header() {
         toggleMenu={() => setIsMenuOpen(false)}
         menuItems={menuItems}
         isHome={isHome}
-        calculateDuration={calculateDuration}
       />
     </header>
   );

@@ -18,20 +18,20 @@ function Home() {
       scroller.scrollTo(id, {
         duration: 800,
         smooth: 'easeInOutQuart',
-        offset: -70, // adjust if your header is sticky
+        offset: -70, 
       });
     }
   }, [location]);
   
   return (
-    <div>
+    <>
       <Hero/>
       <Services/>
       <AboutUs/>
       <OurWork/>
       <Testimonials/>
       <HelpSupport/>
-    </div>
+    </>
     
   )
 }

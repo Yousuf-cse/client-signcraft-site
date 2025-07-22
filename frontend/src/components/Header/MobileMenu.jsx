@@ -7,7 +7,6 @@ export default function MobileMenu({
   toggleMenu,
   menuItems,
   isHome,
-  calculateDuration,
 }) {
   return (
     <>
@@ -57,7 +56,6 @@ export default function MobileMenu({
                 spy={true}
                 smooth={true}
                 offset={-40}
-                duration={calculateDuration(sectionId)}
                 activeClass="text-green-800 bg-yellow-50 border-l-4 border-l-yellow-400"
                 className="flex items-center justify-between px-6 py-4 border-b border-gray-100 text-lg font-medium transition-all duration-200 text-gray-700 hover:bg-green-50 hover:text-green-800 cursor-pointer"
                 onClick={() => setIsMenuOpen(false)}

@@ -15,6 +15,7 @@ export default function AboutUs() {
         duration: 1200,
         delay: 0,
         smooth: "easeInOutQuart",
+        offset: -80,
       });
     }
   }, [location]);

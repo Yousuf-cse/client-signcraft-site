@@ -5,7 +5,6 @@ import { FacebookIcon, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import { Link as ScrollLink, Element, Events, scrollSpy } from "react-scroll";
 
 import { policyLinks, aboutLinks, socialLinks, contactInfo, addressLines } from "../data/footerData"
-import { calculateDuration } from "../lib/scrollUtils";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -113,7 +112,6 @@ export default function Footer() {
                         spy={true}
                         smooth={true}
                         offset={-20}
-                        duration={calculateDuration(sectionId)}
                         className="text-white hover:text-yellow-300 transition-colors cursor-pointer"
                       >
                         {item}

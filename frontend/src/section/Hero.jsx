@@ -1,7 +1,7 @@
-import { useState, useRef } from "react";
+import { useState,useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Phone, MessagesSquare, ArrowRight, Check } from "lucide-react";
-import { Element } from "react-scroll";
+import { Element, scroller } from "react-scroll";
 
 
 export default function Hero() {
@@ -38,6 +38,19 @@ export default function Hero() {
     }
   };
   
+
+    useEffect(() => {
+      if (location.hash) {
+        const section = location.hash.replace("#", "");
+        scroller.scrollTo(section, {
+          duration: 1200,
+          delay: 0,
+          smooth: "easeInOutQuart",
+          offset: -80,
+        });
+      }
+    }, [location]);
+
   return (
     <Element name="home" className="mt-20">
       <div className="bg-green-800 relative overflow-hidden lg:min-h-[calc(90vh-4rem)]">
