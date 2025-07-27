@@ -22,7 +22,7 @@ export default function AboutUs() {
 
   return (
     <Element name="about-us">
-      <div className="bg-green-800 backdrop-blur-md p-8 md:p-10 mt-12 shadow-xl relative overflow-hidden">
+      <div className="bg-green-800 backdrop-blur-md p-8 md:p-10 pt-12 pb-12 shadow-xl relative overflow-hidden">
         {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div
