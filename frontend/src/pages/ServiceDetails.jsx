@@ -1,17 +1,24 @@
 import { useState } from "react"
-import { X, Calendar, Phone, Mail, ArrowLeft } from "lucide-react"
+import { Calendar, ArrowLeft } from "lucide-react"
 import { Link } from "react-router-dom"
-import { servicesData } from "../data/servicesData"
 import { useLocation, useNavigate } from "react-router-dom"
+import craftArt from "../assets/signCraftArtImage.png"
+import ImageGalleryModal from "../components/ImageGalleryModal"
 
 
 export default function ServiceDetailsPage() {
-     const [isBookingModalOpen, setIsBookingModalOpen] = useState(false)
-  const [selectedImage, setSelectedImage] = useState(null)
+      const [selectedImage, setSelectedImage] = useState(null)
+      const [showModal, setShowModal] = useState(false);
       const location = useLocation()
       const navigate = useNavigate()
       const { slug, service } = location.state || {}
-
+      const images = service.images;
+      const maxVisibleImage = 5;
+      const visibleImages = service.images.slice(0, maxVisibleImage);
+      const hiddenImageCount = service.images.length - maxVisibleImage;
+      const showFullGallery = () => {
+        setShowModal(true)
+      };
 
   if (!service) {
     return (
@@ -29,74 +36,163 @@ export default function ServiceDetailsPage() {
   return (
     <div className="min-h-screen bg-white mt-16">
       {/* Header */}
-      <div className="bg-gradient-to-r from-green-600 to-green-700 text-white py-16">
-        <div className="container mx-auto px-4">
-          <Link
-            href="/services"
-            className="inline-flex items-center text-green-100 hover:text-white mb-6 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Services
-          </Link>
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{service.name}</h1>
-          <p className="text-xl text-green-100 max-w-3xl leading-relaxed">{service.description}</p>
-        </div>
-      </div>
+<div className="bg-green-800 text-white py-16 relative overflow-hidden">
+  <div className="container mx-auto px-4 relative z-10">
+    <Link
+      to="/"
+      className="inline-flex items-center text-green-100 hover:text-white mb-6 transition-colors"
+    >
+      <ArrowLeft className="w-4 h-4 mr-2" />
+      Back to Home
+    </Link>
+    <h1 className="text-4xl md:text-5xl font-bold mb-4 cursor-default bg-gradient-to-r from-white to-[#ffde21] bg-clip-text text-transparent leading-[1.4]">
+      {service.name}
+    </h1>
+    <p className="text-xl text-green-100 max-w-3xl leading-relaxed cursor-default">
+      {service.description}
+    </p>
+  </div>
+
+  {/* Image on desktop*/}
+<img
+  src={craftArt}
+  alt="Decorative"
+  className="absolute right-0 top-20 bottom-16 my-auto w-full md:w-[30vw] max-w-sm lg:max-w-md h-auto object-contain opacity-10 md:opacity-60 pointer-events-none z-0"
+/>
+
+</div>
+
+
+
 
       {/* Book Now Section */}
-      <div className="bg-yellow-50 py-8">
+      <div className="bg-white py-12">
+
         <div className="container mx-auto px-4 text-center">
-          <button
-            onClick={() => setIsBookingModalOpen(true)}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          <Link
+            to="/book-installation"
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer"
           >
             <Calendar className="w-5 h-5 inline mr-2" />
-            Book Now - Get Free Quote
-          </button>
+            Schedule Now
+          </Link>
         </div>
       </div>
 
       {/* Image Gallery */}
-      <div className="py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Our {service.name} Portfolio</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {service.images.map((image, index) => (
-              <div
-                key={index}
-                className="group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-                onClick={() => setSelectedImage(image)}
-              >
-                <div className="relative aspect-[4/3] bg-gray-100">
-                  <image
-                    src={image || "/placeholder.svg"}
-                    alt={`${service.name} example ${index + 1}`}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                    <div className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <span className="text-sm font-medium">Click to view</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+ {/* Desktop Grid Layout */}
+<div
+  className="hidden md:grid grid-cols-4 grid-rows-2 gap-3 h-[350px] px-8 mt-4"
+  style={{
+    gridTemplateAreas: `
+      "main main topLeft topRight"
+      "main main bottomLeft bottomRight"
+    `,
+  }}
+>
+  {visibleImages.map((image, index) => {
+    const gridAreas = ["main", "topLeft", "topRight", "bottomLeft", "bottomRight"];
+    const gridArea = gridAreas[index % gridAreas.length];
+    const isLastVisible = index === maxVisibleImage - 1 && hiddenImageCount > 0;
+
+    return (
+      <div
+        key={index}
+        className="relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+        style={{ gridArea }}
+        onClick={() => {
+          if (isLastVisible) showFullGallery();
+          else setSelectedImage(image);
+        }}
+      >
+        <img
+          src={image}
+          alt={`${service.name} example ${index + 1}`}
+          className={`w-full h-full object-cover transition-transform duration-500 ${
+            isLastVisible ? "brightness-75" : "hover:scale-105"
+          }`}
+        />
+        <div className="absolute inset-0 bg-black opacity-0 hover:opacity-20 transition-opacity duration-300 z-10" />
+        <div className="absolute inset-0 flex items-center justify-center z-20">
+          {isLastVisible ? (
+            <span className="text-white text-xl font-semibold">
+              +{hiddenImageCount} more
+            </span>
+          ) : (
+            <span className="text-white text-sm font-medium opacity-0 hover:opacity-100 transition-opacity">
+              Click to view
+            </span>
+          )}
         </div>
       </div>
+    );
+  })}
+  {showModal && (
+  <ImageGalleryModal images={images} onClose={() => setShowModal(false)} />
+)}
+</div>
+
+
+{/* Mobile Layout*/}
+<div className="md:hidden px-4">
+  {/* First image */}
+  {visibleImages.slice(0, 1).map((image, index) => (
+    <div
+      key={index}
+      className="relative w-full overflow-hidden rounded-lg h-56 mb-4 cursor-pointer"
+      onClick={() => setSelectedImage(image)}
+    >
+      <img src={image} alt={`Image ${index + 1}`} className="w-full h-full object-cover" />
+    </div>
+  ))}
+
+  {/* Remaining images */}
+  <div className="grid grid-cols-2 gap-3">
+    {visibleImages.slice(1).map((image, index) => {
+      const isLastVisible = index === 3 && hiddenImageCount > 0;
+
+      return (
+        <div
+          key={index}
+          className={`relative h-36 rounded-lg overflow-hidden shadow-md cursor-pointer ${
+            index % 3 === 0 ? "col-span-2" : "col-span-1"
+          }`}
+          onClick={() => {
+            if (isLastVisible) showFullGallery();
+            else setSelectedImage(image);
+          }}
+        >
+          <img
+            src={image}
+            alt={`Image ${index + 2}`}
+            className={`w-full h-full object-cover ${isLastVisible ? "brightness-75" : ""}`}
+          />
+          {isLastVisible && (
+            <div className="absolute inset-0 flex items-center justify-center z-20">
+              <span className="text-white text-xl font-semibold">
+                +{hiddenImageCount} more
+              </span>
+            </div>
+          )}
+        </div>
+      );
+    })}
+  </div>
+</div>
+
+
 
       {/* Features Section */}
       <div className="bg-gray-50 py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-gray-800 mb-12 text-center">Why Choose Our {service.name}?</h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-12 text-center cursor-default">Why Choose Our {service.name}?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                 <div className="w-6 h-6 bg-green-600 rounded"></div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Premium Quality</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3 cursor-default">Premium Quality</h3>
+              <p className="text-gray-600 cursor-default">
                 High-grade materials and professional craftsmanship ensure long-lasting durability.
               </p>
             </div>
@@ -104,8 +200,8 @@ export default function ServiceDetailsPage() {
               <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
                 <div className="w-6 h-6 bg-yellow-500 rounded"></div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Custom Design</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3 cursor-default">Custom Design</h3>
+              <p className="text-gray-600 cursor-default">
                 Tailored solutions that perfectly match your brand identity and requirements.
               </p>
             </div>
@@ -113,8 +209,8 @@ export default function ServiceDetailsPage() {
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                 <div className="w-6 h-6 bg-green-600 rounded"></div>
               </div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">Fast Installation</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold text-gray-800 mb-3 cursor-default">Fast Installation</h3>
+              <p className="text-gray-600 cursor-default">
                 Quick and professional installation with minimal disruption to your business.
               </p>
             </div>
@@ -122,95 +218,13 @@ export default function ServiceDetailsPage() {
         </div>
       </div>
 
-      {/* Booking Modal */}
-      {isBookingModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-2xl max-w-md w-full p-6 relative">
-            <button
-              onClick={() => setIsBookingModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">Book Your {service.name}</h3>
-
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder="Enter your full name"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                <input
-                  type="tel"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder="Enter your phone number"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder="Enter your email"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Project Details</label>
-                <textarea
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  placeholder="Tell us about your project requirements..."
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-colors"
-              >
-                Submit Request
-              </button>
-            </form>
-
-            <div className="mt-6 pt-6 border-t border-gray-200">
-              <p className="text-sm text-gray-600 text-center mb-4">Or contact us directly:</p>
-              <div className="flex justify-center space-x-6">
-                <a href="tel:+1234567890" className="flex items-center text-green-600 hover:text-green-700">
-                  <Phone className="w-4 h-4 mr-2" />
-                  Call Us
-                </a>
-                <a
-                  href="mailto:info@arabsigncraft.com"
-                  className="flex items-center text-green-600 hover:text-green-700"
-                >
-                  <Mail className="w-4 h-4 mr-2" />
-                  Email Us
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Image Modal */}
       {selectedImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 z-50">
+        <div 
+        className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center p-4 z-50"
+        onClick={() => setSelectedImage(null)}>
           <div className="relative max-w-4xl max-h-full">
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
-            >
-              <X className="w-8 h-8" />
-            </button>
-            <image
+            <img
               src={selectedImage || "/placeholder.svg"}
               alt="Gallery image"
               width={800}
