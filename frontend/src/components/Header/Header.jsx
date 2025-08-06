@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link as RouteLink, useLocation } from "react-router-dom";
 import { Events, scrollSpy } from "react-scroll";
-import DesktopNav from "./DeskTopNav";
+import DesktopNav from "./DesktopNav"
 import MobileMenu from "./MobileMenu";
 import HamburgerMenu from "./HamburgerMenu";
 import { menuItems } from "./menuItems";
