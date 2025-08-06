@@ -58,7 +58,9 @@ export default function MobileMenu({
                 offset={-40}
                 activeClass="text-green-800 bg-yellow-50 border-l-4 border-l-yellow-400"
                 className="flex items-center justify-between px-6 py-4 border-b border-gray-100 text-lg font-medium transition-all duration-200 text-gray-700 hover:bg-green-50 hover:text-green-800 cursor-pointer"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() =>{
+                  setTimeout(() =>  toggleMenu(false), 100)
+                }}
               >
                 <span>{item}</span>
                 <ChevronRight className="h-5 w-5 text-gray-400" />
@@ -68,7 +70,7 @@ export default function MobileMenu({
                 key={item}
                 to={`/#${sectionId}`}
                 className="flex items-center justify-between px-6 py-4 border-b border-gray-100 text-lg font-medium transition-all duration-200 text-gray-700 hover:bg-green-50 hover:text-green-800 cursor-pointer"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => toggleMenu(false)}
               >
                 <span>{item}</span>
                 <ChevronRight className="h-5 w-5 text-gray-400" />
