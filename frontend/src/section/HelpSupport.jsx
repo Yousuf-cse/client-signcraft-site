@@ -48,7 +48,7 @@ export default function HelpSupport() {
 
       <div className="bg-yellow-100 p-4 text-center border-t border-yellow-300">
         <p className="text-yellow-700 font-bold">
-          Need urgent assistance? Call our support hotline at 1-800-SIGN-HELP (Monday-Friday, 9AM-5PM EST)
+          Need urgent assistance? Call our support hotline at +919916946749 (Monday-Friday, 9AM-5PM EST)
         </p>
       </div>
     </Element>
