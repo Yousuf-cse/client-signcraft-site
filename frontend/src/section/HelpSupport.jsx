@@ -16,6 +16,14 @@ export default function HelpSupport() {
     return () => document.body.classList.remove("no-scroll"); // Cleanup on unmount
   }, [showForm]);
 
+  useEffect(() => {
+  const handleClose = () => setShowForm(false);
+  window.addEventListener("closeHelpForm", handleClose);
+
+  return () => window.removeEventListener("closeHelpForm", handleClose);
+}, []);
+
+
   return (
     <Element name="help" className="min-h-screen bg-[#fffff8]">
       <div className="p-12 text-center">

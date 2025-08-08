@@ -16,11 +16,14 @@ export default function DesktopNav({ isHome, menuItems }) {
                   smooth={true}
                   offset={-80}
                   className="text-green-800 hover:text-yellow-500 cursor-pointer transition-colors duration-200 ease-in-out"
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent("closeHelpForm"));
+                  }}
                 >
                   {item}
                 </ScrollLink>
               ) : (
-                <RouteLink to={`/#${sectionId}`} className="cursor-pointer">
+                <RouteLink to={`/#${sectionId}`} className="cursor-pointer" onClick={onClose}>
                   {item}
                 </RouteLink>
               )}

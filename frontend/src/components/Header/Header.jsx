@@ -71,6 +71,12 @@ export default function Header() {
 
   // Function to calculate scroll duration based on distance
 
+
+  const handleOpenMenu = () => {
+  setIsMenuOpen((prev) => !prev); // open the menu
+  window.dispatchEvent(new CustomEvent("closeHelpForm")); // close the help form
+};
+
   return (
     <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-16">
@@ -92,7 +98,7 @@ export default function Header() {
           <div className="flex-1 flex justify-end md:justify-end md:flex">
             <div className="md:hidden mobile-menu-container">
           <HamburgerMenu
-            isOpen={isMenuOpen} toggleMenu={() => setIsMenuOpen((prev) => !prev)}
+            isOpen={isMenuOpen} toggleMenu={handleOpenMenu}
           />
 
               {/* Mobile Menu Overlay */}

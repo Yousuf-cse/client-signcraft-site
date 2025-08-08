@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 
-export default function HelpForm({ onClose }) {
+export default function HepForml({ onClose }) {
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-white mt-16 bg-opacity-90 z-50">
       <div className="bg-white p-6 w-96 relative">

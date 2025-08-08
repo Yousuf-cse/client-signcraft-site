@@ -37,7 +37,10 @@ export default function MobileMenu({
         <div className="bg-green-800 text-white p-4.5 flex items-center justify-between">
           <h2 className="text-xl font-bold"> Arab Sign Craft</h2>
           <button
-            onClick={toggleMenu}
+           onClick={() => {
+            toggleMenu();
+             window.dispatchEvent(new CustomEvent("closeHelpForm")); 
+          }}
             className="text-white hover:text-yellow-300 focus:outline-none"
             aria-label="Close menu"
           >
