@@ -69,8 +69,6 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Function to calculate scroll duration based on distance
-
 
   const handleOpenMenu = () => {
   setIsMenuOpen((prev) => !prev); // open the menu
@@ -83,11 +81,17 @@ export default function Header() {
         <div className="flex items-center h-20">
           {/* Left: Logo */}
           <div className="flex-1 flex-shrink-0 flex items-center min-w-0">
-            <RouteLink
+            {/* <RouteLink
               to="/"
               className="whitespace-nowrap text-2xl font-bold text-green-800 cursor-pointer"
             >
-              Arab <span className="text-yellow-500">Sign Craft</span>
+              <span><img src="https://res.cloudinary.com/dpw89wko7/image/upload/v1754664457/ArabSIgnCraftLogoFinalsvg_ygfihi.svg" alt="" className="w-4 h-4" /></span>Arab <span className="text-yellow-500">Sign Craft</span>
+            </RouteLink> */}
+             <RouteLink
+              to="/"
+              className="whitespace-nowrap text-2xl font-bold text-green-800 cursor-pointer"
+            >
+              <img src="https://res.cloudinary.com/dpw89wko7/image/upload/v1754665658/BrandImageFinal_drtnd8.png" alt="" className="w-35" />
             </RouteLink>
           </div>
           <DesktopNav

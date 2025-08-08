@@ -44,7 +44,8 @@ export default function MobileMenu({
             className="text-white hover:text-yellow-300 focus:outline-none"
             aria-label="Close menu"
           >
-            <X className="h-6 w-6" />
+            {/* <X className="h-6 w-6" /> */} 
+            {/* fix this later */}
           </button>
         </div>
 

@@ -27,20 +27,51 @@ export default function Services() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 ">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {displayedServices.map((service, index) => {
             const Icon = service.icon;
-              const serviceEntry = Object.entries(servicesData).find(
-                ([slug, data]) => data.name === service.title
-              );
-          const [slug, fullServiceData] = serviceEntry || [];
+            const serviceEntry = Object.entries(servicesData).find(
+              ([slug, data]) => data.name === service.title
+            );
+            const [slug, fullServiceData] = serviceEntry || [];
+
+            // Calculate remainders for each breakpoint
+            const remainderMobile = displayedServices.length % 2; // mobile/tablet cols = 2
+            const remainderLarge = displayedServices.length % 4; // large cols = 4
+            const isLastRowMobile = index >= displayedServices.length - remainderMobile;
+            const isLastRowLarge = index >= displayedServices.length - remainderLarge;
+
+            let extraClasses = "";
+
+            /** Mobile & Tablet: Center single leftover card */
+            if (remainderMobile === 1 && index === displayedServices.length - 1) {
+              extraClasses += " col-span-2"; // spans both columns
+            }
+
+            /** Large screen leftover handling */
+            if (remainderLarge === 1 && index === displayedServices.length - 1) {
+              // 1 card leftover
+              extraClasses += " lg:col-start-2 lg:col-span-2";
+            } 
+            else if (remainderLarge === 2 && isLastRowLarge) {
+              // 2 cards leftover
+              if (index === displayedServices.length - 2) {
+                extraClasses += " lg:col-start-2";
+              }
+            } 
+            else if (remainderLarge === 3 && isLastRowLarge) {
+              // 3 cards leftover
+              if (index === displayedServices.length - 3) {
+                extraClasses += " lg:col-start-1";
+              }
+            }
 
             return (
               <Link
                 to={`/services/${slug}`}
                 state={{ slug, service: fullServiceData }}
                 key={index}
-                className="group bg-white rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100"
+                className={`group bg-white rounded-2xl p-4 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100${extraClasses}`}
               >
                 <div className="mb-4 bg-green-800 text-[#fffff8] rounded-xl p-3 inline-block group-hover:bg-[#2fff14e8] group-hover:text-green-800 transition-colors duration-300">
                   <Icon size={24} />
@@ -71,7 +102,7 @@ export default function Services() {
         <div className="text-center mt-12">
           <button
             onClick={() => setShowMore(!showMore)}
-            className="bg-green-800 text-[#fffff8] px-8 py-3 rounded-full hover:bg-[#99ff8be8] hover:text-green-800 transition-colors duration-300 font-semibold"
+            className="bg-green-800 text-[#fffff8] px-8 py-3 rounded-full hover:bg-[#99ff8be8] hover:text-green-800 transition-colors duration-300 font-semibold cursor-pointer"
           >
             {showMore ? "See Less" : "Show More"}
           </button>
