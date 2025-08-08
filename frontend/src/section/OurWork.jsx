@@ -1,19 +1,13 @@
 import { useState } from "react"
 import { Expand } from "lucide-react"
 import { Element } from "react-scroll"
-import workImage1 from "../assets/workImage1.webp"
-import workImage2 from "../assets/workImage2.webp"
-import workImage3 from "../assets/workImage3.webp"
-import workImage4 from "../assets/workImage4.webp"
-import workImage5 from "../assets/workImage5.webp"
 
-// Replace these with your actual project images
 const projects = [
-  { id: 1, image: workImage3, gridArea: "main" },
-  { id: 2, image: workImage2, gridArea: "topRight" },
-  { id: 3, image: workImage5, gridArea: "bottomLeft" },
-  { id: 4, image: workImage4, gridArea: "bottomRight" },
-  { id: 5, image: workImage1, gridArea: "topLeft" },
+  { id: 1, image: "https://res.cloudinary.com/dpw89wko7/image/upload/v1754651262/workImage3_woddwu.webp", gridArea: "main" },
+  { id: 2, image: "https://res.cloudinary.com/dpw89wko7/image/upload/v1754651262/workImage2_k4rjtc.webp", gridArea: "topRight" },
+  { id: 3, image: "https://res.cloudinary.com/dpw89wko7/image/upload/v1754651659/workImage5_i3psjd.webp", gridArea: "bottomLeft" },
+  { id: 4, image: "https://res.cloudinary.com/dpw89wko7/image/upload/v1754651659/workImage4_lr19v2.webp", gridArea: "bottomRight" },
+  { id: 5, image: "https://res.cloudinary.com/dpw89wko7/image/upload/v1754651262/workImage1_h6qxwm.webp", gridArea: "topLeft" },
 ]
 
 export default function OurWork() {
@@ -48,6 +42,7 @@ export default function OurWork() {
               <img
                 src={project.image || "/placeholder.svg"}
                 alt={`Project ${project.id}`}
+                loading="lazy"
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
               />
             </div>

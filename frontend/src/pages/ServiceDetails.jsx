@@ -2,9 +2,7 @@ import { useState } from "react"
 import { Calendar, ArrowLeft } from "lucide-react"
 import { Link } from "react-router-dom"
 import { useLocation, useNavigate } from "react-router-dom"
-import craftArt from "../assets/signCraftArtImage.png"
 import ImageGalleryModal from "../components/ImageGalleryModal"
-
 
 export default function ServiceDetailsPage() {
       const [selectedImage, setSelectedImage] = useState(null)
@@ -53,10 +51,10 @@ export default function ServiceDetailsPage() {
     </p>
   </div>
 
-  {/* Image on desktop*/}
 <img
-  src={craftArt}
+  src="https://res.cloudinary.com/dpw89wko7/image/upload/v1754651836/signCraftArtImage_umrbun.png"
   alt="Decorative"
+  loading="lazy"
   className="absolute right-0 top-20 bottom-16 my-auto w-full md:w-[30vw] max-w-sm lg:max-w-md h-auto object-contain opacity-10 md:opacity-60 pointer-events-none z-0"
 />
 

@@ -1,7 +1,7 @@
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouteLink } from "react-router-dom";
 
-export default function DesktopNav({ isHome, menuItems }) {
+export default function DesktopNav({ isHome, menuItems, onClose }) {
   return (
     <nav className="hidden md:flex flex-none justify-center">
       <ul className="flex space-x-4">

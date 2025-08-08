@@ -25,10 +25,6 @@ export const faqs = [
         "Since our signs are custom-made, we do not accept returns. However, if there's an issue with the craftsmanship, we'll work to resolve it.",
     },
     {
-      question: "Can I track my order?",
-      answer: "Yes! Once your order is shipped, we will provide a tracking number via email.",
-    },
-    {
       question: "Do you offer bulk discounts?",
       answer: "We offer discounts for bulk and business orders. Contact us for a quote.",
     },
