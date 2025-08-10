@@ -7,7 +7,7 @@ export const socialLinks = [
 ];
 
 export const contactInfo = {
-  phone: "+91 7947126383",
+  phone: "+919916946749",
   email: "arabsigncraft@gmail.com",
 };
 
